@@ -190,6 +190,12 @@ export default {
             this.error.pass = '';
             if (!this.user.pass) {
                 this.error.pass = 'Please enter password';
+            } else if (
+                this.user.pass.trim().length < 5 ||
+                this.user.pass.trim().length > 20
+            ) {
+                this.error.pass =
+                    'Invalid password length, should be between 5 and 20';
             }
         },
 
@@ -197,6 +203,12 @@ export default {
             this.error.orgName = '';
             if (!this.user.orgName) {
                 this.error.orgName = 'Please enter organization name';
+            } else if (
+                this.user.orgName.trim().length < 1 ||
+                this.user.orgName.trim().length > 100
+            ) {
+                this.error.orgName =
+                    'Invalid org name length, should be between 1 and 100';
             }
         },
 
@@ -204,6 +216,12 @@ export default {
             this.error.name = '';
             if (!this.user.name) {
                 this.error.name = 'Please enter your name';
+            } else if (
+                this.user.name.trim().length < 1 ||
+                this.user.name.trim().length > 100
+            ) {
+                this.error.name =
+                    'Invalid name length, should be between 5 and 20';
             }
         },
 
@@ -217,7 +235,10 @@ export default {
         validateOrgId() {
             this.error.orgId = '';
             if (!this.user.orgId) {
-                this.error.orgId = 'Please enter organization id';
+                this.error.orgId = 'Please enter organization / GSTIN id';
+            } else if (this.user.orgId.trim().length !== 15) {
+                this.error.orgId =
+                    'Invalid size, GSTIN should be 15 characters!';
             }
         },
 

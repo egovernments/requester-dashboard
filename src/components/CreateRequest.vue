@@ -4,40 +4,68 @@
             <transition mode="out-in" name="fade">
                 <div v-if="!requestCreated">
                     <div class="title is-4">Create Request</div>
-                    <br />
 
                     <transition appear mode="out-in" name="fade">
                         <div>
+                            <div class="title is-6">
+                                Please ensure the following criteria are
+                                fulfilled while uploading the request file
+                            </div>
+                            <div></div>
                             <div class="subtitle is-6">
-                                NOTE: You can claim upto
-                                {{ org.activePassLimit | formatNumber }} passes
-                                <br />only, in a single request
+                                <ul>
+                                    <li>
+                                        1. File format should be .csv, download
+                                        Pass Template below and use given format
+                                        ONLY! <br /><br />
+                                    </li>
+                                    <li>
+                                        2. Maximum allowed date for pass
+                                        issuance is currently fixed at
+                                        03/05/2020 <br /><br />
+                                    </li>
+                                    <li>
+                                        3. Make sure the header row is present
+                                        in the .csv file <br /><br />
+                                    </li>
+                                    <li>
+                                        4. All details asked for employees are
+                                        mandatory in the .csv file <br /><br />
+                                    </li>
+                                    <li>
+                                        5. Make sure the Validity Date format is
+                                        either DD/MM/YYYY or DD-MM-YYYY only
+                                        <br /><br />
+                                    </li>
+                                    <li>
+                                        6. All mobile numbers should be valid
+                                        <br /><br />
+                                    </li>
+                                    <li>
+                                        7. You can claim upto
+                                        {{ org.activePassLimit | formatNumber }}
+                                        passes only, in a single request<br /><br />
+                                    </li>
+                                </ul>
                             </div>
 
+                            <hr />
                             <div></div>
-
-                            <div class="title is-6">Download Template</div>
 
                             <b-button
                                 :href="passTemplateFile"
-                                class="has-text-primary has-text-weight-semibold"
+                                class="has-text-primary has-text-weight-bold"
                                 download
                                 icon-left="download"
-                                size="is-small"
+                                size="is-medium"
                                 tag="a"
                                 type="is-white"
                                 >Download Pass Template</b-button
                             >
-
                             <hr />
-
-                            <div class="title is-6">Upload the file</div>
                             <div></div>
-                            <div class="subtitle is-7">
-                                Ensure all details have been filled in the
-                                template file
-                            </div>
-
+                            <div class="title is-5">Upload file</div>
+                            <div></div>
                             <label
                                 class="upload-file-container is-flex has-text-primary"
                                 for="orderFile"
