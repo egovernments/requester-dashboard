@@ -28,26 +28,23 @@
 
                     <b-table-column
                         field="orderType"
-                        label="Request Type"
+                        label="Order Id"
                         sortable
+                        >{{ props.row.id }}</b-table-column
                     >
-                        <lozenge
-                            :type="
-                                props.row.orderType == 'person'
-                                    ? 'primary'
-                                    : 'warning'
-                            "
-                            >{{
-                                props.row.orderType | formatRequestLabel
-                            }}</lozenge
-                        >
-                    </b-table-column>
 
                     <b-table-column
                         field="requestCount"
-                        label="No. of Passes"
+                        label="No. of Passes Generated"
                         sortable
                         >{{ props.row.requestCount }}</b-table-column
+                    >
+
+                    <b-table-column
+                        field="requestCount"
+                        label="No. of Passes Rejected"
+                        sortable
+                        >0</b-table-column
                     >
 
                     <b-table-column field="purpose" label="Purpose" sortable>
@@ -108,7 +105,6 @@
 </template>
 
 <script>
-import Lozenge from './Lozenge.vue';
 import dayjs from 'dayjs';
 import EPassService from '../service/EPassService';
 import { showSuccess, showError } from '../utils/toast';
@@ -116,9 +112,7 @@ import { showSuccess, showError } from '../utils/toast';
 export default {
     name: 'OrdersTable',
 
-    components: {
-        Lozenge
-    },
+    components: {},
     data() {
         return {
             isPaginated: true,
