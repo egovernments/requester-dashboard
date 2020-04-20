@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import EPassService from '../service/EPassService';
 import { showError } from '../utils/toast';
+import get from 'lodash/get';
 
 Vue.use(Vuex);
 
@@ -29,13 +30,16 @@ export default new Vuex.Store({
         async fetchOrders({ commit }) {
             try {
                 const { data } = await EPassService.getOrders();
-
-                commit('setOrderList', data.orders);
-
-                localStorage.setItem(
-                    'reqOrderList',
-                    JSON.stringify(data.orders)
-                );
+                const orders = get(data, 'orders', []).map(item => {
+                    return {
+                        ...item,
+                        searchTerm: `${item.id}|${
+                            item.requestCount
+                        }|${item.purpose.toLowerCase()}`
+                    };
+                });
+                commit('setOrderList', orders);
+                localStorage.setItem('reqOrderList', JSON.stringify(orders));
             } catch (error) {
                 showError('Unable to fetch requests');
             }
