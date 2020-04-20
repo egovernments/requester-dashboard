@@ -21,6 +21,11 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
+                            <b-button @click="faqDownload" type="is-primary"
+                                >FAQs</b-button
+                            >
+                        </div>
+                        <div class="level-item">
                             <b-button
                                 @click="openCreateRequest"
                                 type="is-primary"
@@ -98,6 +103,9 @@ export default {
             this.openCR = false;
 
             this.$store.dispatch('fetchOrders');
+        },
+        faqDownload() {
+            window.open(process.env.VUE_APP_FAQ_LINK);
         }
     },
 
