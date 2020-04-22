@@ -110,12 +110,9 @@
                             </div>
                         </b-table-column>
 
-                        <b-table-column
-                            field="orderType"
-                            label="Order Id"
-                            sortable
-                            >{{ props.row.id }}</b-table-column
-                        >
+                        <b-table-column field="id" label="Order Id" sortable>{{
+                            props.row.id
+                        }}</b-table-column>
 
                         <b-table-column
                             field="requestCount"
@@ -315,4 +312,12 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.filter-options {
+    .dropdown-item.is-active,
+    .dropdown .dropdown-menu .has-link .is-active,
+    .dropdown-item.is-active {
+        background-color: #f7f7f7;
+    }
+}
+</style>

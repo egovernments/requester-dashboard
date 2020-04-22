@@ -35,6 +35,23 @@
                     </div>
                 </div>
 
+                <div class="container info-container">
+                    <div class="is-flex">
+                        <b-icon icon="information" type="is-primary"></b-icon>
+                        <span
+                            >COVID ePass Application is integrated with Aarogya
+                            Setu Application. Every individual employee in each
+                            pass request is checked for COVID-19 status at the
+                            time of pass generation with the Aarogya Setu
+                            Application, and upon failing that validation check,
+                            the pass request for that employee is rejected.
+                            Communication regarding the request rejection is
+                            sent to the Organisation Admin and the State
+                            Team.</span
+                        >
+                    </div>
+                </div>
+
                 <orders-table></orders-table>
             </div>
         </div>
@@ -157,5 +174,19 @@ export default {
 
 .toast {
     font-weight: 600;
+}
+
+.info-container {
+    margin-bottom: 30px !important;
+    border: 1px solid #00a4ff;
+    border-radius: 5px;
+}
+
+.info-container > div {
+    margin: 10px;
+}
+
+.info-container span:nth-child(2) {
+    margin-left: 10px;
 }
 </style>
