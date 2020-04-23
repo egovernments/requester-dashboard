@@ -68,23 +68,25 @@ export default {
         });
     },
 
-    createAccount({ name, email, password, orgID, orgName, stateName }) {
+    createAccount({ name, email, password, orgID, orgName, stateName, peid }) {
         return axios.post('/createAccount', {
             name,
             email,
             password,
             orgID,
+            peid,
             orgName,
             stateName
         });
     },
 
-    verifyOTP({ emailId, otp, stateName }) {
+    verifyOTP({ emailId, otp, stateName, peidOTP }) {
         return axios.post('/verifyOTP', {
             identifier: emailId,
             accountIdentifierType: 'email',
             otp,
-            stateName
+            stateName,
+            peidOTP
         });
     },
 

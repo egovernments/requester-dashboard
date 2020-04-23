@@ -24,6 +24,19 @@
                             v-model="user.otp"
                         ></b-input>
                     </b-field>
+                    <b-field
+                        :message="error.peidOTP"
+                        :type="{ 'is-danger': !!error.peidOTP }"
+                        label="Enter 6 digit PEID OTP"
+                    >
+                        <b-input
+                            @blur="validatepeidOTP"
+                            @focus="error.peidOTP = ''"
+                            maxlength="6"
+                            type="number"
+                            v-model="user.peidOTP"
+                        ></b-input>
+                    </b-field>
 
                     <div class="buttons m-y-48">
                         <b-button
@@ -81,10 +94,12 @@ export default {
             emailId: email,
             user: {
                 otp: '',
-                state: state
+                state: state,
+                peidOTP: ''
             },
             error: {
-                otp: ''
+                otp: '',
+                peidOTP: ''
             },
             loading: false,
             accCreated: false
@@ -103,8 +118,18 @@ export default {
             }
         },
 
+        validatepeidOTP() {
+            this.error.peidOTP = '';
+            if (this.user.peidOTP) {
+                if (this.user.peidOTP.length !== 6) {
+                    this.error.peidOTP = 'Invalid Peid OTP';
+                }
+            }
+        },
+
         isValid() {
             this.validateOTP();
+            this.validatepeidOTP();
 
             return !this.error.otp;
         },
@@ -119,7 +144,8 @@ export default {
                 const { data } = await EPassService.verifyOTP({
                     emailId: this.emailId,
                     otp: this.user.otp.trim(),
-                    stateName: this.user.state
+                    stateName: this.user.state,
+                    peidOTP: this.user.peidOTP
                 });
 
                 this.loading = false;

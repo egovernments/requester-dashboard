@@ -31,6 +31,19 @@
                 </b-field>
 
                 <b-field
+                    :message="error.peid"
+                    :type="{ 'is-danger': !!error.peid }"
+                    label="PE Id"
+                >
+                    <b-input
+                        @blur="validatePEID"
+                        @focus="error.peid = ''"
+                        type="text"
+                        v-model="user.peid"
+                    ></b-input>
+                </b-field>
+
+                <b-field
                     :message="error.state"
                     :type="{ 'is-danger': !!error.state }"
                     label="State"
@@ -140,7 +153,6 @@
 <script>
 import { isValidEmail } from '../utils/helpers';
 import EPassService from '../service/EPassService';
-import dotProp from 'dot-prop';
 import { getError } from '../utils/error-handler';
 
 export default {
@@ -152,6 +164,7 @@ export default {
             user: {
                 orgName: '',
                 orgId: '',
+                peid: undefined,
                 name: '',
                 email: '',
                 pass: '',
@@ -162,6 +175,7 @@ export default {
                 orgName: '',
                 orgId: '',
                 name: '',
+                peid: '',
                 email: '',
                 pass: '',
                 cpass: '',
@@ -242,6 +256,19 @@ export default {
             }
         },
 
+        validatePEID() {
+            this.error.peid = '';
+            if (this.user.peid) {
+                if (
+                    this.user.peid.trim().length < 12 ||
+                    this.user.peid.trim().length > 19
+                ) {
+                    this.error.peid =
+                        'Invalid size, PE Id should be between 12 to 19 characters!';
+                }
+            }
+        },
+
         confimPassword() {
             this.error.cpass = '';
             if (!this.user.cpass) {
@@ -259,6 +286,7 @@ export default {
             this.validateOrgName();
             this.validateState();
             this.validateOrgId();
+            this.validatePEID();
             this.validateEmail();
             this.validatePassword();
             this.confimPassword();
@@ -273,13 +301,22 @@ export default {
 
             this.loading = true;
             try {
-                const { name, email, pass, orgId, orgName, state } = this.user;
+                const {
+                    name,
+                    email,
+                    pass,
+                    orgId,
+                    orgName,
+                    state,
+                    peid
+                } = this.user;
 
                 await EPassService.createAccount({
                     email: email.trim(),
                     name: name.trim(),
                     password: pass.trim(),
                     orgName: orgName.trim(),
+                    peid: peid ? peid.trim() : peid,
                     orgID: orgId.trim(),
                     stateName: state
                 });
@@ -290,16 +327,8 @@ export default {
                 sessionStorage.setItem('state', state);
                 this.$router.push('/verify-otp');
             } catch (error) {
-                const message = dotProp.get(error, 'response.data.message');
-                if (message && message.indexOf('verify your email') > -1) {
-                    await EPassService.requestOTP(this.user.email.trim());
-                    sessionStorage.setItem('email', this.user.email.trim());
-                    this.$router.push('/verify-otp');
-                } else {
-                    this.apiError = getError(error);
-                }
-
                 this.loading = false;
+                this.apiError = getError(error);
             }
         }
     }
