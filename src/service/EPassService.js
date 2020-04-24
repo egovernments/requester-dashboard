@@ -90,11 +90,12 @@ export default {
         });
     },
 
-    requestOTP(emailId, stateName) {
+    requestOTP(emailId, stateName, peid) {
         return axios.post('/requestOTP', {
             identifier: emailId,
             stateName,
-            accountIdentifierType: 'email'
+            accountIdentifierType: 'email',
+            peid
         });
     },
 

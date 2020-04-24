@@ -325,6 +325,9 @@ export default {
 
                 sessionStorage.setItem('email', email.trim());
                 sessionStorage.setItem('state', state);
+                if (peid) {
+                    sessionStorage.setItem('peid', peid);
+                }
                 this.$router.push('/verify-otp');
             } catch (error) {
                 this.loading = false;

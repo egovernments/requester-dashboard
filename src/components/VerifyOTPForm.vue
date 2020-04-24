@@ -88,6 +88,7 @@ export default {
     data() {
         const email = sessionStorage.getItem('email');
         const state = sessionStorage.getItem('state');
+        const peid = sessionStorage.getItem('peid');
         sessionStorage.clear();
 
         return {
@@ -95,7 +96,8 @@ export default {
             user: {
                 otp: '',
                 state: state,
-                peidOTP: ''
+                peidOTP: '',
+                peid: peid
             },
             error: {
                 otp: '',
@@ -170,7 +172,11 @@ export default {
 
         async resendOTP() {
             try {
-                await EPassService.requestOTP(this.emailId, this.user.state);
+                await EPassService.requestOTP(
+                    this.emailId,
+                    this.user.state,
+                    this.user.peid
+                );
 
                 showSuccess(`OTP sent to ${this.emailId}`);
             } catch (error) {
