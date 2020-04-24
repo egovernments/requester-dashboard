@@ -151,7 +151,7 @@
 </template>
 
 <script>
-import { isValidEmail } from '../utils/helpers';
+import { isValidEmail, isValidPeid } from '../utils/helpers';
 import EPassService from '../service/EPassService';
 import { getError } from '../utils/error-handler';
 
@@ -259,12 +259,9 @@ export default {
         validatePEID() {
             this.error.peid = '';
             if (this.user.peid) {
-                if (
-                    this.user.peid.trim().length < 12 ||
-                    this.user.peid.trim().length > 19
-                ) {
+                if (!isValidPeid(this.user.peid.trim())) {
                     this.error.peid =
-                        'Invalid size, Principal Entity ID (PEID) should be between 12 to 19 characters!';
+                        'Principal Entity ID (PEID) should be only numbers! Length should be between 12-19 characters!';
                 }
             }
         },

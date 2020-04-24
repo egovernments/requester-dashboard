@@ -3,6 +3,11 @@ export const isValidEmail = email => {
     return EMAIL_REGEX.test(email);
 };
 
+export const isValidPeid = peid => {
+    const PEID_REGEX = /^[0-9]{12,19}$/i;
+    return PEID_REGEX.test(peid);
+};
+
 export const isProd = process.env.NODE_ENV === 'production';
 export const isGithub = window.location.hostname.indexOf('github') > -1;
 
