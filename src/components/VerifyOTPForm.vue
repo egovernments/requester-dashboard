@@ -14,7 +14,7 @@
                     <b-field
                         :message="error.otp"
                         :type="{ 'is-danger': !!error.otp }"
-                        label="Enter 6 digit OTP"
+                        label="Enter 6 digit OTP *"
                     >
                         <b-input
                             @blur="validateOTP"
@@ -27,7 +27,7 @@
                     <b-field
                         :message="error.peidOTP"
                         :type="{ 'is-danger': !!error.peidOTP }"
-                        label="Enter 6 digit PEID OTP"
+                        label="Enter 6 digit Principal Entity ID (PEID) OTP"
                     >
                         <b-input
                             @blur="validatepeidOTP"
@@ -96,8 +96,8 @@ export default {
             user: {
                 otp: '',
                 state: state,
-                peidOTP: '',
-                peid: peid
+                peidOTP: undefined,
+                peid: peid ? peid : undefined
             },
             error: {
                 otp: '',

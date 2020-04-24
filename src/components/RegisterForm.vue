@@ -7,7 +7,7 @@
                 <b-field
                     :message="error.orgName"
                     :type="{ 'is-danger': !!error.orgName }"
-                    label="Organization name"
+                    label="Organization name *"
                 >
                     <b-input
                         @blur="validateOrgName"
@@ -20,7 +20,7 @@
                 <b-field
                     :message="error.orgId"
                     :type="{ 'is-danger': !!error.orgId }"
-                    label="GSTIN Id"
+                    label="GSTIN Id *"
                 >
                     <b-input
                         @blur="validateOrgId"
@@ -33,7 +33,7 @@
                 <b-field
                     :message="error.peid"
                     :type="{ 'is-danger': !!error.peid }"
-                    label="PE Id"
+                    label="Principal Entity ID (PEID)"
                 >
                     <b-input
                         @blur="validatePEID"
@@ -46,7 +46,7 @@
                 <b-field
                     :message="error.state"
                     :type="{ 'is-danger': !!error.state }"
-                    label="State"
+                    label="State *"
                 >
                     <b-select
                         :disabled="Object.keys(stateMap).length === 0"
@@ -68,7 +68,7 @@
                 <b-field
                     :message="error.name"
                     :type="{ 'is-danger': !!error.name }"
-                    label="Your name"
+                    label="Your name *"
                 >
                     <b-input
                         @blur="validateName"
@@ -81,7 +81,7 @@
                 <b-field
                     :message="error.email"
                     :type="{ 'is-danger': !!error.email }"
-                    label="Official / Organization Email"
+                    label="Official / Organization Email *"
                 >
                     <b-input
                         @blur="validateEmail"
@@ -94,7 +94,7 @@
                 <b-field
                     :message="error.pass"
                     :type="{ 'is-danger': !!error.pass }"
-                    label="Enter Password"
+                    label="Enter Password *"
                 >
                     <b-input
                         @blur="validatePassword"
@@ -108,7 +108,7 @@
                 <b-field
                     :message="error.cpass"
                     :type="{ 'is-danger': !!error.cpass }"
-                    label="Confirm Password"
+                    label="Confirm Password *"
                 >
                     <b-input
                         @blur="confimPassword"
@@ -264,7 +264,7 @@ export default {
                     this.user.peid.trim().length > 19
                 ) {
                     this.error.peid =
-                        'Invalid size, PE Id should be between 12 to 19 characters!';
+                        'Invalid size, Principal Entity ID (PEID) should be between 12 to 19 characters!';
                 }
             }
         },
