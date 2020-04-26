@@ -3,6 +3,7 @@ import { SHOW_LOADING, HIDE_LOADING } from '../utils/contants';
 import { getAuthToken, get } from '../utils/session';
 import dotprop from 'dot-prop';
 import { isProd, isGithub } from '../utils/helpers';
+import isEmpty from 'lodash/get';
 
 const BASE_URL = (() => {
     const DEFAULT_API = 'http://localhost:8080/';
@@ -74,7 +75,7 @@ export default {
             email,
             password,
             orgID,
-            peid,
+            peid: !peid || isEmpty(peid) ? undefined : peid,
             orgName,
             stateName
         });
