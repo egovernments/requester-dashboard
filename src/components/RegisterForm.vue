@@ -33,8 +33,22 @@
                 <b-field
                     :message="error.peid"
                     :type="{ 'is-danger': !!error.peid }"
-                    label="Principal Entity ID (PEID)"
                 >
+                    <template slot="label">
+                        Principal Entity ID (PEID)
+                        <b-tooltip
+                            placement="is-right"
+                            type="is-dark"
+                            label="Principal Entity ID (PEID) [It is a unique ID usually obtained by companies who use services from Telecom Service Providers (TSP) through registration in the UCC DLT platform. Authenticating your organization via PE ID will increase trust in the company registration.]"
+                        >
+                            <b-icon
+                                class="info-icon"
+                                size="is-small"
+                                icon="information"
+                                type="is-grey"
+                            ></b-icon>
+                        </b-tooltip>
+                    </template>
                     <b-input
                         @blur="validatePEID"
                         @focus="error.peid = ''"
@@ -346,5 +360,12 @@ export default {
             font-weight: 600;
         }
     }
+}
+
+.b-tooltip.is-dark:after {
+    background: #363636;
+    color: whitesmoke;
+    white-space: inherit !important;
+    width: 300px !important;
 }
 </style>

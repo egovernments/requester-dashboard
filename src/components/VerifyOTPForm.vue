@@ -29,6 +29,21 @@
                         :type="{ 'is-danger': !!error.peidOTP }"
                         label="Enter 6 digit Principal Entity ID (PEID) OTP"
                     >
+                        <template slot="label">
+                            Enter 6 digit Principal Entity ID (PEID) OTP
+                            <b-tooltip
+                                placement="is-right"
+                                type="is-dark"
+                                label="Enter 6 digit Principal Entity ID (PEID) OTP received on the mobile number registered with PEID"
+                            >
+                                <b-icon
+                                    class="info-icon"
+                                    size="is-small"
+                                    icon="information"
+                                    type="is-grey"
+                                ></b-icon>
+                            </b-tooltip>
+                        </template>
                         <b-input
                             @blur="validatepeidOTP"
                             @focus="error.peidOTP = ''"
@@ -207,5 +222,11 @@ export default {
 }
 .m-r-8 {
     margin-right: 8px;
+}
+.b-tooltip.is-dark:after {
+    background: #363636;
+    color: whitesmoke;
+    white-space: inherit !important;
+    width: 300px !important;
 }
 </style>
