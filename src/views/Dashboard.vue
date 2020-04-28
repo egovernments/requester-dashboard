@@ -17,6 +17,22 @@
                             >
                                 <div class="is-size-5">{{ org.name }}</div>
                             </div>
+                            <div class="seperator"></div>
+                            <div
+                                class="is-block has-text-black has-text-weight-semibold"
+                            >
+                                <div class="is-size-5">
+                                    {{ org.activePassLimit }} Overall Limit
+                                </div>
+                            </div>
+                            <div class="seperator"></div>
+                            <div
+                                class="is-block has-text-black has-text-weight-semibold"
+                            >
+                                <div class="is-size-5">
+                                    {{ org.activePassCount }} Active passes
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="level-right">
@@ -68,7 +84,7 @@ import AppHeader from '../components/AppHeader.vue';
 import CreateRequest from '../components/CreateRequest.vue';
 import EPassService from '../service/EPassService';
 import OrdersTable from '../components/OrdersTable.vue';
-import { showError } from '../utils/toast';
+import { getError } from '../utils/error-handler';
 
 export default {
     name: 'Dashboard',
@@ -112,7 +128,7 @@ export default {
                 this.org = data;
                 localStorage.setItem('org', JSON.stringify(data));
             } catch (error) {
-                showError('Unable to fetch organization');
+                getError(error);
             }
         },
 

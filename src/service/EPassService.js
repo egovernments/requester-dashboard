@@ -49,7 +49,10 @@ axios.interceptors.response.use(
     },
     function(error) {
         const message = dotprop.get(error, 'response.data.message');
-        if (String(message).indexOf('invalid token') > -1) {
+        if (
+            error.response.status === 401 ||
+            String(message).indexOf('invalid token') > -1
+        ) {
             window.dispatchEvent(new CustomEvent('LOGIN'));
             return Promise.reject();
         }

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import EPassService from '../service/EPassService';
-import { showError } from '../utils/toast';
+import { getError } from '../utils/error-handler';
 import get from 'lodash/get';
 
 Vue.use(Vuex);
@@ -41,7 +41,7 @@ export default new Vuex.Store({
                 commit('setOrderList', orders);
                 localStorage.setItem('reqOrderList', JSON.stringify(orders));
             } catch (error) {
-                showError('Unable to fetch requests');
+                getError(error);
             }
         },
         async fetchStateList({ commit }) {
