@@ -22,7 +22,12 @@
                                 class="is-block has-text-black has-text-weight-semibold"
                             >
                                 <div class="is-size-5">
-                                    {{ org.activePassLimit }} Overall Limit
+                                    {{
+                                        org.activePassLimit
+                                            ? org.activePassLimit
+                                            : 0
+                                    }}
+                                    Overall Limit
                                 </div>
                             </div>
                             <div class="seperator"></div>
@@ -30,7 +35,12 @@
                                 class="is-block has-text-black has-text-weight-semibold"
                             >
                                 <div class="is-size-5">
-                                    {{ org.activePassCount }} Active passes
+                                    {{
+                                        org.activePassCount
+                                            ? org.activePassCount
+                                            : 0
+                                    }}
+                                    Active passes
                                 </div>
                             </div>
                         </div>
