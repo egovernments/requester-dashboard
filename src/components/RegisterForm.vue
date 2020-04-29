@@ -7,8 +7,10 @@
                 <b-field
                     :message="error.orgName"
                     :type="{ 'is-danger': !!error.orgName }"
-                    label="Organization name *"
                 >
+                    <template slot="label">
+                        Organization name <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validateOrgName"
                         @focus="error.orgName = ''"
@@ -20,8 +22,10 @@
                 <b-field
                     :message="error.orgId"
                     :type="{ 'is-danger': !!error.orgId }"
-                    label="GSTIN Id *"
                 >
+                    <template slot="label">
+                        GSTIN Id <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validateOrgId"
                         @focus="error.orgId = ''"
@@ -60,8 +64,10 @@
                 <b-field
                     :message="error.state"
                     :type="{ 'is-danger': !!error.state }"
-                    label="State *"
                 >
+                    <template slot="label">
+                        State <span class="has-text-danger">*</span>
+                    </template>
                     <b-select
                         :disabled="Object.keys(stateMap).length === 0"
                         @change="validateState"
@@ -82,8 +88,10 @@
                 <b-field
                     :message="error.name"
                     :type="{ 'is-danger': !!error.name }"
-                    label="Your name *"
                 >
+                    <template slot="label">
+                        Your name <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validateName"
                         @focus="error.name = ''"
@@ -95,8 +103,11 @@
                 <b-field
                     :message="error.email"
                     :type="{ 'is-danger': !!error.email }"
-                    label="Official / Organization Email *"
                 >
+                    <template slot="label">
+                        Official / Organization Email
+                        <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validateEmail"
                         @focus="error.email = ''"
@@ -108,8 +119,10 @@
                 <b-field
                     :message="error.pass"
                     :type="{ 'is-danger': !!error.pass }"
-                    label="Enter Password *"
                 >
+                    <template slot="label">
+                        Enter Password <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validatePassword"
                         @focus="error.pass = ''"
@@ -122,8 +135,10 @@
                 <b-field
                     :message="error.cpass"
                     :type="{ 'is-danger': !!error.cpass }"
-                    label="Confirm Password *"
                 >
+                    <template slot="label">
+                        Confirm Password <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="confimPassword"
                         @focus="error.cpass = ''"

@@ -14,8 +14,11 @@
                     <b-field
                         :message="error.otp"
                         :type="{ 'is-danger': !!error.otp }"
-                        label="Enter 6 digit OTP *"
                     >
+                        <template slot="label">
+                            Enter 6 digit OTP
+                            <span class="has-text-danger">*</span>
+                        </template>
                         <b-input
                             @blur="validateOTP"
                             @focus="error.otp = ''"

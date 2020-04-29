@@ -118,14 +118,14 @@
                             field="requestCount"
                             label="No. of Passes Generated"
                             sortable
-                            >{{ props.row.requestCount }}</b-table-column
+                            >{{ props.row.applicationAccepted }}</b-table-column
                         >
 
                         <b-table-column
                             field="requestCount"
                             label="No. of Passes Rejected"
                             sortable
-                            >0</b-table-column
+                            >{{ props.row.applicationRejected }}</b-table-column
                         >
 
                         <b-table-column

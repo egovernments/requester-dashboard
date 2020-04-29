@@ -7,8 +7,10 @@
                 <b-field
                     :message="error.email"
                     :type="{ 'is-danger': !!error.email }"
-                    label="Email"
                 >
+                    <template slot="label">
+                        Email <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validateEmail"
                         @focus="error.email = ''"
@@ -20,8 +22,10 @@
                 <b-field
                     :message="error.pass"
                     :type="{ 'is-danger': !!error.pass }"
-                    label="Enter Password"
                 >
+                    <template slot="label">
+                        Enter Password <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                         @blur="validatePassword"
                         @focus="error.pass = ''"
@@ -34,8 +38,10 @@
                 <b-field
                     :message="error.state"
                     :type="{ 'is-danger': !!error.state }"
-                    label="State"
                 >
+                    <template slot="label">
+                        State <span class="has-text-danger">*</span>
+                    </template>
                     <b-select
                         :disabled="Object.keys(stateMap).length === 0"
                         @change="validateState"
