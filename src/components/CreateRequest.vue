@@ -22,7 +22,7 @@
                                     <li>
                                         2. Maximum allowed date for pass
                                         issuance is currently fixed at
-                                        03/05/2020 <br /><br />
+                                        17/05/2020 <br /><br />
                                     </li>
                                     <li>
                                         3. Make sure the header row is present
