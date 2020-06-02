@@ -22,7 +22,7 @@
                                     <li>
                                         2. Maximum allowed date for pass
                                         issuance is currently fixed at
-                                        31/05/2020 <br /><br />
+                                        {{ validTillDate }} <br /><br />
                                     </li>
                                     <li>
                                         3. Make sure the header row is present
@@ -149,6 +149,7 @@ import SideSheet from './SideSheet.vue';
 import EPassService from '../service/EPassService';
 import { getAuthToken } from '../utils/session';
 import { getError } from '../utils/error-handler';
+import get from 'lodash/get';
 
 export default {
     name: 'CreateRequest',
@@ -158,6 +159,7 @@ export default {
     },
     data() {
         let org = localStorage.getItem('org');
+        const state = sessionStorage.getItem('state');
 
         if (org) {
             org = JSON.parse(org);
@@ -169,7 +171,8 @@ export default {
             file: null,
             apiError: null,
             loading: false,
-            requestCreated: false
+            requestCreated: false,
+            state: state || null
         };
     },
 
@@ -180,6 +183,22 @@ export default {
     },
 
     computed: {
+        convertEpochToDate() {
+            const stateConfig = this.$store.state.stateConfig;
+            const validDate = get(stateConfig, `${this.state}.validTill`);
+            const dateFromApi = new Date(validDate);
+            let month = dateFromApi.getMonth() + 1;
+            let day = dateFromApi.getDate();
+            let year = dateFromApi.getFullYear();
+            month = (month > 9 ? '' : '0') + month;
+            day = (day > 9 ? '' : '0') + day;
+            return `${day}/${month}/${year}`;
+        },
+
+        validTillDate() {
+            return this.convertEpochToDate;
+        },
+
         disableBtn() {
             if (this.loading) {
                 return true;

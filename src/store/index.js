@@ -15,7 +15,8 @@ if (reqOrderList) {
 export default new Vuex.Store({
     state: {
         orderList: reqOrderList || [],
-        stateMap: {}
+        stateMap: {},
+        stateConfig: {}
     },
 
     mutations: {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
         },
         setStateList(store, list) {
             store.stateMap = list;
+        },
+        setStateConfig(store, list) {
+            store.stateConfig = list;
         }
     },
     actions: {
@@ -39,7 +43,7 @@ export default new Vuex.Store({
                     };
                 });
                 commit('setOrderList', orders);
-                localStorage.setItem('reqOrderList', JSON.stringify(orders));
+                // localStorage.setItem('reqOrderList', JSON.stringify(orders));
             } catch (error) {
                 getError(error);
             }
@@ -47,7 +51,19 @@ export default new Vuex.Store({
         async fetchStateList({ commit }) {
             const { data: res } = await EPassService.fetchStateList();
             commit('setStateList', res.stateMap);
-            localStorage.setItem('stateList', res.stateMap);
+            const stateConfig = res.stateConfig;
+            const stateMap = res.stateMap;
+
+            const stateConfigMap =
+                stateMap &&
+                Object.keys(stateMap).reduce((result, item) => {
+                    result[stateMap[item]] = stateConfig[item];
+                    return result;
+                }, {});
+
+            commit('setStateConfig', stateConfigMap);
+
+            // localStorage.setItem('stateList', res.stateMap);
         }
     }
 });
