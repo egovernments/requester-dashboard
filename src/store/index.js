@@ -43,7 +43,7 @@ export default new Vuex.Store({
                     };
                 });
                 commit('setOrderList', orders);
-                // localStorage.setItem('reqOrderList', JSON.stringify(orders));
+                localStorage.setItem('reqOrderList', JSON.stringify(orders));
             } catch (error) {
                 getError(error);
             }
@@ -62,8 +62,7 @@ export default new Vuex.Store({
                 }, {});
 
             commit('setStateConfig', stateConfigMap);
-
-            // localStorage.setItem('stateList', res.stateMap);
+            localStorage.setItem('stateList', res.stateMap);
         }
     }
 });
